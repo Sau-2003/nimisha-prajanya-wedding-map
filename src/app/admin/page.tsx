@@ -116,7 +116,8 @@ export default function AdminPage() {
     Papa.parse(liveDataUrl, {
       download: true, header: true, skipEmptyLines: true,
       complete: async function(results) {
-        const mappedData = results.data.map((row: any) => {
+        // We added ": any[]" right here to satisfy TypeScript's strict rules
+        const mappedData: any[] = results.data.map((row: any) => {
           if (!row['Name']) return null;
           const transport = (row['Transportation (Arrival)'] || '').toLowerCase();
           const hotel = row['Hotel'] || ''; const room = row['Room No'] || '';
